@@ -1,4 +1,5 @@
 import { useState } from "react";
+import InteractiveHero from "@/components/ui/hero-section-nexus";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -38,6 +39,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Hero Section */}
+      <InteractiveHero />
+
       {/* Sticky CTA Bar */}
       <div className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border p-4 shadow-card">
         <div className="container mx-auto flex items-center justify-between">
@@ -48,61 +52,6 @@ const Index = () => {
           </div>
         </div>
       </div>
-
-      {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 lg:py-32">
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Column - Content */}
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <Badge className="bg-gradient-accent text-foreground border-0 px-4 py-2">
-                  <img src={indiaFlag} alt="India" className="w-4 h-4 mr-2" />
-                  #MadeInIndia | Free for 1st 100 Orgs
-                </Badge>
-                
-                <h1 className="text-5xl lg:text-7xl font-bold leading-tight">
-                  <span className="highlight-orange">Track</span> Time.{" "}
-                  <span className="highlight-orange">Boost</span> Productivity.
-                </h1>
-                
-                <p className="text-xl text-muted-foreground max-w-lg">
-                  Smart, affordable time tracking built for freelancers, teams, and agencies in India.
-                </p>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="btn-primary text-lg">
-                  Start Free Trial
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button 
-                  variant="outline" 
-                  className="btn-secondary text-lg"
-                  onClick={() => scrollToSection('how-it-works')}
-                >
-                  <PlayCircle className="mr-2 h-5 w-5" />
-                  See How It Works
-                </Button>
-              </div>
-            </div>
-
-            {/* Right Column - Dashboard Preview */}
-            <div className="relative">
-              <div className="relative rounded-3xl overflow-hidden shadow-glow border border-border">
-                <img 
-                  src={heroDashboard} 
-                  alt="Trakkar Dashboard Preview" 
-                  className="w-full h-auto"
-                />
-                <div className="absolute top-4 left-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
-                  Live Preview
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Problem → Solution Section */}
       <section className="py-20 bg-muted/30">
