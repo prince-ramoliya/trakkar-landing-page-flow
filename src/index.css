@@ -129,16 +129,16 @@
 @layer components {
   /* Hero button variants */
   .btn-primary {
-    @apply bg-primary text-primary-foreground hover:bg-brand-orange-dark rounded-xl px-8 py-4 font-semibold shadow-soft transition-smooth;
+    @apply bg-primary text-primary-foreground hover:bg-brand-orange-dark rounded-xl px-8 py-4 font-semibold shadow-soft transition-all duration-300 ease-out;
   }
   
   .btn-secondary {
-    @apply border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground rounded-xl px-8 py-4 font-semibold transition-smooth;
+    @apply border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground rounded-xl px-8 py-4 font-semibold transition-all duration-300 ease-out;
   }
 
   /* Feature card styling */
   .feature-card {
-    @apply bg-card rounded-2xl p-8 shadow-card hover:shadow-glow transition-smooth;
+    @apply bg-card rounded-2xl p-8 shadow-card hover:shadow-glow transition-all duration-300 ease-out;
   }
 
   /* Gradient text */
