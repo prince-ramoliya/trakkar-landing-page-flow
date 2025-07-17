@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import InteractiveHero from "@/components/ui/hero-section-nexus";
+import { BentoGrid, type BentoItem } from "@/components/ui/bento-grid";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -25,7 +27,10 @@ import {
   Activity,
   PieChart,
   UserCheck,
-  FileBarChart
+  FileBarChart,
+  AlertTriangle,
+  DollarSign,
+  Eye
 } from "lucide-react";
 import heroDashboard from "@/assets/hero-dashboard.jpg";
 import indiaFlag from "@/assets/india-flag.jpg";
@@ -37,118 +42,189 @@ const Index = () => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Bento Grid items for problems and solutions
+  const problemSolutionItems: BentoItem[] = [
+    {
+      title: "Manual logs = human errors",
+      description: "Employees forget to track time accurately",
+      icon: <AlertTriangle className="w-4 h-4 text-red-500" />,
+      status: "Problem",
+      tags: ["Manual", "Errors"],
+      colSpan: 1,
+    },
+    {
+      title: "Smart auto-tracking with screenshot capture",
+      description: "Automatic time logging with visual proof of work",
+      icon: <Timer className="w-4 h-4 text-blue-500" />,
+      status: "Solution",
+      tags: ["Auto", "Screenshots"],
+      colSpan: 2,
+      hasPersistentHover: true,
+    },
+    {
+      title: "No team activity overview",
+      description: "Managers can't see real-time productivity",
+      icon: <Eye className="w-4 h-4 text-red-500" />,
+      status: "Problem",
+      tags: ["Visibility", "Management"],
+    },
+    {
+      title: "Real-time team insights",
+      description: "Live dashboard showing team productivity and activity",
+      icon: <BarChart3 className="w-4 h-4 text-blue-500" />,
+      status: "Solution", 
+      tags: ["Analytics", "Real-time"],
+      colSpan: 2,
+    },
+    {
+      title: "Expensive tools not built for Indian teams",
+      description: "Foreign solutions cost too much for local businesses",
+      icon: <DollarSign className="w-4 h-4 text-red-500" />,
+      status: "Problem",
+      tags: ["Cost", "Foreign"],
+    },
+    {
+      title: "₹70/user pricing, Made for India",
+      description: "Affordable pricing designed for Indian market needs",
+      icon: <Shield className="w-4 h-4 text-blue-500" />,
+      status: "Solution",
+      tags: ["Affordable", "India"],
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#111111] text-gray-300">
       {/* Hero Section */}
       <InteractiveHero />
 
       {/* Sticky CTA Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-card border-t border-border p-4 shadow-card">
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#1a1a1a] border-t border-gray-700/50 p-4 shadow-xl backdrop-blur-md">
         <div className="container mx-auto flex items-center justify-between">
-          <span className="text-foreground font-medium">Your team's productivity dashboard – simplified.</span>
+          <span className="text-gray-300 font-medium">Your team's productivity dashboard – simplified.</span>
           <div className="flex gap-3">
-            <Button className="btn-primary">Start Free Trial</Button>
-            <Button variant="outline" className="btn-secondary">Book a Demo</Button>
+            <motion.button
+              className="bg-[#0CF2A0] text-[#111111] px-6 py-2 rounded-md text-sm font-semibold hover:bg-opacity-90 transition-colors duration-200 shadow-sm hover:shadow-md"
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            >
+              Start Free Trial
+            </motion.button>
+            <motion.button
+              className="border border-gray-600 text-gray-300 px-6 py-2 rounded-md text-sm font-semibold hover:bg-gray-700/30 transition-colors duration-200"
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            >
+              Book a Demo
+            </motion.button>
           </div>
         </div>
       </div>
 
-      {/* Problem → Solution Section */}
-      <section className="py-20 bg-muted/30">
+      {/* Problem → Solution Section with Bento Grid */}
+      <section className="py-20 bg-[#0a0a0a]">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              Why Traditional Time Tracking <span className="text-destructive">Fails</span>
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-6">
+              Why Traditional Time Tracking <span className="text-red-400">Fails</span>
             </h2>
-          </div>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Common problems vs. Trakkar's innovative solutions
+            </p>
+          </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Problems */}
-            <div className="space-y-6">
-              <h3 className="text-2xl font-bold text-destructive mb-8">Common Problems:</h3>
-              
-              {[
-                { icon: XCircle, title: "Manual logs = human errors", desc: "Employees forget to track time accurately" },
-                { icon: XCircle, title: "No team activity overview", desc: "Managers can't see real-time productivity" },
-                { icon: XCircle, title: "Expensive tools not built for Indian teams", desc: "Foreign solutions cost too much for local businesses" }
-              ].map((problem, index) => (
-                <div key={index} className="flex items-start gap-4 p-6 bg-destructive/10 rounded-2xl border border-destructive/20">
-                  <problem.icon className="h-6 w-6 text-destructive mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-semibold text-destructive mb-2">{problem.title}</h4>
-                    <p className="text-muted-foreground">{problem.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Solutions */}
-            <div className="space-y-6">
-              <h3 className="text-2xl font-bold text-primary mb-8">Trakkar's Solutions:</h3>
-              
-              {[
-                { icon: CheckCircle, title: "Smart auto-tracking with screenshot capture", desc: "Automatic time logging with visual proof of work" },
-                { icon: CheckCircle, title: "Real-time team insights", desc: "Live dashboard showing team productivity and activity" },
-                { icon: CheckCircle, title: "₹70/user pricing, Made for India", desc: "Affordable pricing designed for Indian market needs" }
-              ].map((solution, index) => (
-                <div key={index} className="flex items-start gap-4 p-6 bg-primary/10 rounded-2xl border border-primary/20">
-                  <solution.icon className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <h4 className="font-semibold text-primary mb-2">{solution.title}</h4>
-                    <p className="text-muted-foreground">{solution.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <BentoGrid items={problemSolutionItems} />
+          </motion.div>
         </div>
       </section>
 
       {/* Feature Highlights */}
-      <section className="py-20">
+      <section className="py-20 bg-[#111111]">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              Everything You Need to <span className="text-gradient">Track & Optimize</span>
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-6">
+              Everything You Need to <span className="text-[#0CF2A0]">Track & Optimize</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               Comprehensive time tracking features designed for modern teams
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <motion.div 
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
             {[
-              { icon: Timer, title: "Smart Time Capture", desc: "Automatic time tracking with manual override options", color: "text-brand-orange" },
-              { icon: Camera, title: "Screenshot Monitoring", desc: "Visual proof of work with customizable capture intervals", color: "text-brand-blue" },
-              { icon: Target, title: "Project & Task Tracking", desc: "Organize work by projects and track individual tasks", color: "text-brand-orange" },
-              { icon: Calendar, title: "Leave Management", desc: "Handle time-off requests and attendance tracking", color: "text-brand-blue" },
-              { icon: PieChart, title: "Reports & Analytics", desc: "Detailed insights into productivity and time usage", color: "text-brand-orange" },
-              { icon: UserCheck, title: "Team & User Control", desc: "Manage permissions and team access levels", color: "text-brand-blue" }
+              { icon: Timer, title: "Smart Time Capture", desc: "Automatic time tracking with manual override options", color: "text-[#0CF2A0]" },
+              { icon: Camera, title: "Screenshot Monitoring", desc: "Visual proof of work with customizable capture intervals", color: "text-blue-400" },
+              { icon: Target, title: "Project & Task Tracking", desc: "Organize work by projects and track individual tasks", color: "text-[#0CF2A0]" },
+              { icon: Calendar, title: "Leave Management", desc: "Handle time-off requests and attendance tracking", color: "text-blue-400" },
+              { icon: PieChart, title: "Reports & Analytics", desc: "Detailed insights into productivity and time usage", color: "text-[#0CF2A0]" },
+              { icon: UserCheck, title: "Team & User Control", desc: "Manage permissions and team access levels", color: "text-blue-400" }
             ].map((feature, index) => (
-              <Card key={index} className="feature-card group cursor-pointer">
+              <motion.div
+                key={index}
+                className="group relative p-6 rounded-xl bg-[#1a1a1a] border border-gray-700/50 hover:border-[#0CF2A0]/30 transition-all duration-300 cursor-pointer"
+                whileHover={{ scale: 1.02, y: -2 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
                 <div className="text-center space-y-4">
-                  <div className={`inline-flex p-4 rounded-2xl bg-gradient-accent ${feature.color}`}>
+                  <div className={`inline-flex p-4 rounded-2xl bg-white/5 group-hover:bg-white/10 transition-colors ${feature.color}`}>
                     <feature.icon className="h-8 w-8" />
                   </div>
-                  <h3 className="text-xl font-bold">{feature.title}</h3>
-                  <p className="text-muted-foreground">{feature.desc}</p>
+                  <h3 className="text-xl font-semibold text-white">{feature.title}</h3>
+                  <p className="text-gray-400">{feature.desc}</p>
                 </div>
-              </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="py-20 bg-muted/30">
+      <section id="how-it-works" className="py-20 bg-[#0a0a0a]">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              Start in <span className="highlight-orange">3 Simple Steps</span>
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-6">
+              Start in <span className="text-[#0CF2A0]">3 Simple Steps</span>
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <motion.div 
+            className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, staggerChildren: 0.2 }}
+            viewport={{ once: true }}
+          >
             {[
               { 
                 step: "01", 
@@ -169,49 +245,79 @@ const Index = () => {
                 desc: "Access productivity reports and screenshots" 
               }
             ].map((step, index) => (
-              <div key={index} className="text-center space-y-6 relative">
+              <motion.div 
+                key={index} 
+                className="text-center space-y-6 relative"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+              >
                 <div className="relative">
-                  <div className="w-20 h-20 bg-primary rounded-3xl flex items-center justify-center mx-auto mb-4 glow-orange">
-                    <step.icon className="h-10 w-10 text-primary-foreground" />
+                  <div className="w-20 h-20 bg-[#0CF2A0] rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#0CF2A0]/30">
+                    <step.icon className="h-10 w-10 text-[#111111]" />
                   </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-accent rounded-full flex items-center justify-center text-accent-foreground font-bold text-sm">
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
                     {step.step}
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold">{step.title}</h3>
-                <p className="text-muted-foreground">{step.desc}</p>
+                <h3 className="text-2xl font-semibold text-white">{step.title}</h3>
+                <p className="text-gray-400">{step.desc}</p>
                 {index < 2 && (
-                  <ArrowRight className="h-6 w-6 text-muted-foreground mx-auto mt-8 hidden md:block absolute -right-12 top-8" />
+                  <ArrowRight className="h-6 w-6 text-gray-500 mx-auto mt-8 hidden md:block absolute -right-12 top-8" />
                 )}
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="text-center mt-12">
-            <Button className="btn-primary text-lg">
+          <motion.div 
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <motion.button
+              className="bg-[#0CF2A0] text-[#111111] px-8 py-3 rounded-md text-lg font-semibold hover:bg-opacity-90 transition-colors duration-200 shadow-lg hover:shadow-xl"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            >
               Get Started – Free for 30 Days
-            </Button>
-          </div>
+            </motion.button>
+          </motion.div>
         </div>
       </section>
 
       {/* Pricing Section */}
-      <section className="py-20">
+      <section className="py-20 bg-[#111111]">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              Simple Pricing for <span className="text-gradient">Every Team</span>
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-6">
+              Simple Pricing for <span className="text-[#0CF2A0]">Every Team</span>
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="max-w-md mx-auto">
-            <Card className="feature-card text-center relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-hero"></div>
+          <motion.div 
+            className="max-w-md mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-[#1a1a1a] border border-gray-700/50 rounded-xl p-8 text-center relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0CF2A0] to-blue-500"></div>
               
-              <div className="space-y-6 p-8">
+              <div className="space-y-6">
                 <div>
-                  <div className="text-5xl font-bold text-primary mb-2">₹70</div>
-                  <div className="text-muted-foreground">per user per month</div>
+                  <div className="text-5xl font-bold text-[#0CF2A0] mb-2">₹70</div>
+                  <div className="text-gray-400">per user per month</div>
                 </div>
 
                 <div className="space-y-3">
@@ -223,47 +329,64 @@ const Index = () => {
                     "Made in India 🇮🇳"
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center justify-center gap-3">
-                      <CheckCircle className="h-5 w-5 text-primary" />
-                      <span>{feature}</span>
+                      <CheckCircle className="h-5 w-5 text-[#0CF2A0]" />
+                      <span className="text-gray-300">{feature}</span>
                     </div>
                   ))}
                 </div>
 
-                <Button className="btn-primary w-full text-lg">
+                <motion.button
+                  className="bg-[#0CF2A0] text-[#111111] w-full py-3 rounded-md text-lg font-semibold hover:bg-opacity-90 transition-colors duration-200 shadow-lg hover:shadow-xl"
+                  whileHover={{ scale: 1.02, y: -1 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                >
                   Start Free Trial
-                </Button>
+                </motion.button>
               </div>
-            </Card>
+            </div>
 
             {/* Free Seats Counter */}
-            <div className="mt-8 p-6 bg-primary/10 rounded-2xl border border-primary/20">
+            <div className="mt-8 p-6 bg-[#0CF2A0]/10 rounded-xl border border-[#0CF2A0]/20">
               <div className="text-center space-y-3">
-                <div className="text-lg font-semibold">🎁 Free for first 100 organizations</div>
+                <div className="text-lg font-semibold text-white">🎁 Free for first 100 organizations</div>
                 <div className="flex items-center gap-2 justify-center">
-                  <div className="flex-1 bg-muted rounded-full h-2">
+                  <div className="flex-1 bg-gray-700 rounded-full h-2">
                     <div 
-                      className="bg-primary h-2 rounded-full" 
+                      className="bg-[#0CF2A0] h-2 rounded-full" 
                       style={{ width: `${((100 - freeSeatsLeft) / 100) * 100}%` }}
                     ></div>
                   </div>
                 </div>
-                <div className="text-primary font-bold">{freeSeatsLeft} Free Seats Left</div>
+                <div className="text-[#0CF2A0] font-bold">{freeSeatsLeft} Free Seats Left</div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-[#0a0a0a]">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              What Teams Say About <span className="highlight-orange">Trakkar</span>
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-6">
+              What Teams Say About <span className="text-[#0CF2A0]">Trakkar</span>
             </h2>
-          </div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <motion.div 
+            className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, staggerChildren: 0.2 }}
+            viewport={{ once: true }}
+          >
             {[
               {
                 name: "Priya Sharma",
@@ -287,116 +410,154 @@ const Index = () => {
                 rating: 5
               }
             ].map((testimonial, index) => (
-              <Card key={index} className="feature-card">
+              <motion.div 
+                key={index} 
+                className="bg-[#1a1a1a] border border-gray-700/50 rounded-xl p-6 hover:border-[#0CF2A0]/30 transition-all duration-300"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02, y: -2 }}
+              >
                 <div className="space-y-4">
                   <div className="flex gap-1">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 text-primary fill-current" />
+                      <Star key={i} className="h-5 w-5 text-[#0CF2A0] fill-current" />
                     ))}
                   </div>
                   
-                  <p className="text-muted-foreground italic">"{testimonial.feedback}"</p>
+                  <p className="text-gray-300 italic">"{testimonial.feedback}"</p>
                   
-                  <div className="border-t border-border pt-4">
-                    <div className="font-semibold">{testimonial.name}</div>
-                    <div className="text-sm text-muted-foreground">{testimonial.role}, {testimonial.company}</div>
+                  <div className="border-t border-gray-700 pt-4">
+                    <div className="font-semibold text-white">{testimonial.name}</div>
+                    <div className="text-sm text-gray-400">{testimonial.role}, {testimonial.company}</div>
                   </div>
                 </div>
-              </Card>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="text-center mt-12">
-            <Badge className="bg-gradient-accent text-foreground border-0 px-6 py-3 text-lg">
+          <motion.div 
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <div className="bg-gradient-to-r from-[#0CF2A0] to-blue-500 text-[#111111] border-0 px-6 py-3 text-lg rounded-lg font-semibold inline-block">
               2,157+ happy users | Built by Angrio Technologies 🇮🇳
-            </Badge>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20">
+      <section className="py-20 bg-[#111111]">
         <div className="container mx-auto px-4 max-w-4xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-              Got <span className="text-gradient">Questions?</span>
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-6">
+              Got <span className="text-[#0CF2A0]">Questions?</span>
             </h2>
-          </div>
+          </motion.div>
 
-          <Accordion type="single" collapsible className="space-y-4">
-            {[
-              {
-                question: "How does screenshot tracking work?",
-                answer: "Trakkar captures screenshots at customizable intervals (every 3, 5, or 10 minutes) when time tracking is active. Screenshots are securely stored and only visible to authorized team members. You can blur sensitive information and control who sees what."
-              },
-              {
-                question: "Is my data secure?",
-                answer: "Absolutely. We use enterprise-grade encryption for all data transmission and storage. Screenshots and time data are stored on secure Indian servers with regular backups. We comply with data protection standards and never share your information."
-              },
-              {
-                question: "What happens after the free trial?",
-                answer: "After your 30-day free trial, you can continue with our ₹70/user per month plan. No credit card required for the trial. You can cancel anytime without any penalties or hidden fees."
-              },
-              {
-                question: "Can I manage multiple teams?",
-                answer: "Yes! Trakkar supports multiple organizations and teams. You can create different projects, assign team members to specific projects, and manage permissions for each team separately."
-              },
-              {
-                question: "Do you offer customer support?",
-                answer: "We provide 24/7 customer support via email and chat. Our Indian support team understands local business needs and can help you in Hindi or English. We also offer onboarding assistance for larger teams."
-              }
-            ].map((faq, index) => (
-              <AccordionItem key={index} value={`item-${index}`} className="border border-border rounded-2xl px-6">
-                <AccordionTrigger className="text-left font-semibold hover:no-underline">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <Accordion type="single" collapsible className="space-y-4">
+              {[
+                {
+                  question: "How does screenshot tracking work?",
+                  answer: "Trakkar captures screenshots at customizable intervals (every 3, 5, or 10 minutes) when time tracking is active. Screenshots are securely stored and only visible to authorized team members. You can blur sensitive information and control who sees what."
+                },
+                {
+                  question: "Is my data secure?",
+                  answer: "Absolutely. We use enterprise-grade encryption for all data transmission and storage. Screenshots and time data are stored on secure Indian servers with regular backups. We comply with data protection standards and never share your information."
+                },
+                {
+                  question: "What happens after the free trial?",
+                  answer: "After your 30-day free trial, you can continue with our ₹70/user per month plan. No credit card required for the trial. You can cancel anytime without any penalties or hidden fees."
+                },
+                {
+                  question: "Can I manage multiple teams?",
+                  answer: "Yes! Trakkar supports multiple organizations and teams. You can create different projects, assign team members to specific projects, and manage permissions for each team separately."
+                },
+                {
+                  question: "Do you offer customer support?",
+                  answer: "We provide 24/7 customer support via email and chat. Our Indian support team understands local business needs and can help you in Hindi or English. We also offer onboarding assistance for larger teams."
+                }
+              ].map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`} className="border border-gray-700/50 rounded-xl px-6 bg-[#1a1a1a]">
+                  <AccordionTrigger className="text-left font-semibold hover:no-underline text-white">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-400">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </motion.div>
 
-          <div className="text-center mt-12">
-            <p className="text-muted-foreground mb-4">Still have questions?</p>
-            <Button variant="outline" className="btn-secondary">
+          <motion.div 
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-gray-400 mb-4">Still have questions?</p>
+            <motion.button
+              className="border border-gray-600 text-gray-300 px-6 py-2 rounded-md font-semibold hover:bg-gray-700/30 transition-colors duration-200"
+              whileHover={{ scale: 1.03, y: -1 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            >
               Contact Us
-            </Button>
-          </div>
+            </motion.button>
+          </motion.div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-card border-t border-border py-16 mb-20">
+      <footer className="bg-[#1a1a1a] border-t border-gray-700/50 py-16 mb-20">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             {/* Logo & Tagline */}
             <div className="md:col-span-2 space-y-4">
-              <div className="text-2xl font-bold text-gradient">Trakkar</div>
-              <p className="text-muted-foreground max-w-md">
+              <div className="text-2xl font-bold text-[#0CF2A0]">Trakkar</div>
+              <p className="text-gray-400 max-w-md">
                 Smarter Time Management for Teams & Freelancers.
               </p>
               <div className="flex items-center gap-2">
                 <img src={indiaFlag} alt="Made in India" className="w-6 h-6" />
-                <span className="text-sm text-muted-foreground">Made in India with ❤️</span>
+                <span className="text-sm text-gray-400">Made in India with ❤️</span>
               </div>
             </div>
 
             {/* Quick Links */}
             <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <div>Features</div>
-                <div>Pricing</div>
-                <div>Contact</div>
-                <div>Login</div>
+              <h4 className="font-semibold mb-4 text-white">Quick Links</h4>
+              <div className="space-y-2 text-sm text-gray-400">
+                <div className="hover:text-[#0CF2A0] cursor-pointer transition-colors">Features</div>
+                <div className="hover:text-[#0CF2A0] cursor-pointer transition-colors">Pricing</div>
+                <div className="hover:text-[#0CF2A0] cursor-pointer transition-colors">Contact</div>
+                <div className="hover:text-[#0CF2A0] cursor-pointer transition-colors">Login</div>
               </div>
             </div>
 
             {/* Contact Info */}
             <div>
-              <h4 className="font-semibold mb-4">Contact</h4>
-              <div className="space-y-3 text-sm text-muted-foreground">
+              <h4 className="font-semibold mb-4 text-white">Contact</h4>
+              <div className="space-y-3 text-sm text-gray-400">
                 <div className="flex items-center gap-2">
                   <Phone className="h-4 w-4" />
                   +91 8141067657
@@ -409,7 +570,7 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="border-t border-border mt-12 pt-8 text-center text-sm text-muted-foreground">
+          <div className="border-t border-gray-700 mt-12 pt-8 text-center text-sm text-gray-400">
             Copyright © 2025 Angrio Technologies. All rights reserved.
           </div>
         </div>
