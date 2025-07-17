@@ -103,7 +103,7 @@ const Index = () => {
           <span className="text-gray-300 font-medium">Your team's productivity dashboard – simplified.</span>
           <div className="flex gap-3">
             <motion.button
-              className="bg-[#0CF2A0] text-[#111111] px-6 py-2 rounded-md text-sm font-semibold hover:bg-opacity-90 transition-colors duration-200 shadow-sm hover:shadow-md"
+              className="bg-blue-500 text-white px-6 py-2 rounded-md text-sm font-semibold hover:bg-blue-600 transition-colors duration-200 shadow-sm hover:shadow-md"
               whileHover={{ scale: 1.03, y: -1 }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
@@ -162,7 +162,7 @@ const Index = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-6">
-              Everything You Need to <span className="text-[#0CF2A0]">Track & Optimize</span>
+              Everything You Need to <span className="text-blue-500">Track & Optimize</span>
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               Comprehensive time tracking features designed for modern teams
@@ -177,21 +177,21 @@ const Index = () => {
             viewport={{ once: true }}
           >
             {[
-              { icon: Timer, title: "Smart Time Capture", desc: "Automatic time tracking with manual override options", color: "text-[#0CF2A0]" },
+              { icon: Timer, title: "Smart Time Capture", desc: "Automatic time tracking with manual override options", color: "text-blue-500" },
               { icon: Camera, title: "Screenshot Monitoring", desc: "Visual proof of work with customizable capture intervals", color: "text-blue-400" },
-              { icon: Target, title: "Project & Task Tracking", desc: "Organize work by projects and track individual tasks", color: "text-[#0CF2A0]" },
+              { icon: Target, title: "Project & Task Tracking", desc: "Organize work by projects and track individual tasks", color: "text-blue-500" },
               { icon: Calendar, title: "Leave Management", desc: "Handle time-off requests and attendance tracking", color: "text-blue-400" },
-              { icon: PieChart, title: "Reports & Analytics", desc: "Detailed insights into productivity and time usage", color: "text-[#0CF2A0]" },
+              { icon: PieChart, title: "Reports & Analytics", desc: "Detailed insights into productivity and time usage", color: "text-blue-500" },
               { icon: UserCheck, title: "Team & User Control", desc: "Manage permissions and team access levels", color: "text-blue-400" }
             ].map((feature, index) => (
               <motion.div
                 key={index}
-                className="group relative p-6 rounded-xl bg-[#1a1a1a] border border-gray-700/50 hover:border-[#0CF2A0]/30 transition-all duration-300 cursor-pointer"
+                className="group relative p-6 rounded-xl bg-[#1a1a1a] border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 cursor-pointer"
                 whileHover={{ scale: 1.02, y: -2 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
                 <div className="text-center space-y-4">
-                  <div className={`inline-flex p-4 rounded-2xl bg-white/5 group-hover:bg-white/10 transition-colors ${feature.color}`}>
+                  <div className={`inline-flex p-4 rounded-2xl bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors ${feature.color}`}>
                     <feature.icon className="h-8 w-8" />
                   </div>
                   <h3 className="text-xl font-semibold text-white">{feature.title}</h3>
@@ -214,7 +214,7 @@ const Index = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-6">
-              Start in <span className="text-[#0CF2A0]">3 Simple Steps</span>
+              Start in <span className="text-blue-500">3 Simple Steps</span>
             </h2>
           </motion.div>
 
@@ -254,10 +254,10 @@ const Index = () => {
                 viewport={{ once: true }}
               >
                 <div className="relative">
-                  <div className="w-20 h-20 bg-[#0CF2A0] rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#0CF2A0]/30">
-                    <step.icon className="h-10 w-10 text-[#111111]" />
+                  <div className="w-20 h-20 bg-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-500/30">
+                    <step.icon className="h-10 w-10 text-white" />
                   </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
                     {step.step}
                   </div>
                 </div>
@@ -278,7 +278,7 @@ const Index = () => {
             viewport={{ once: true }}
           >
             <motion.button
-              className="bg-[#0CF2A0] text-[#111111] px-8 py-3 rounded-md text-lg font-semibold hover:bg-opacity-90 transition-colors duration-200 shadow-lg hover:shadow-xl"
+              className="bg-blue-500 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-600 transition-colors duration-200 shadow-lg hover:shadow-xl"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
@@ -300,7 +300,7 @@ const Index = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-6">
-              Simple Pricing for <span className="text-[#0CF2A0]">Every Team</span>
+              Simple Pricing for <span className="text-blue-500">Every Team</span>
             </h2>
           </motion.div>
 
@@ -312,11 +312,11 @@ const Index = () => {
             viewport={{ once: true }}
           >
             <div className="bg-[#1a1a1a] border border-gray-700/50 rounded-xl p-8 text-center relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#0CF2A0] to-blue-500"></div>
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-600"></div>
               
               <div className="space-y-6">
                 <div>
-                  <div className="text-5xl font-bold text-[#0CF2A0] mb-2">₹70</div>
+                  <div className="text-5xl font-bold text-blue-500 mb-2">₹70</div>
                   <div className="text-gray-400">per user per month</div>
                 </div>
 
@@ -329,14 +329,14 @@ const Index = () => {
                     "Made in India 🇮🇳"
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center justify-center gap-3">
-                      <CheckCircle className="h-5 w-5 text-[#0CF2A0]" />
+                      <CheckCircle className="h-5 w-5 text-blue-500" />
                       <span className="text-gray-300">{feature}</span>
                     </div>
                   ))}
                 </div>
 
                 <motion.button
-                  className="bg-[#0CF2A0] text-[#111111] w-full py-3 rounded-md text-lg font-semibold hover:bg-opacity-90 transition-colors duration-200 shadow-lg hover:shadow-xl"
+                  className="bg-blue-500 text-white w-full py-3 rounded-md text-lg font-semibold hover:bg-blue-600 transition-colors duration-200 shadow-lg hover:shadow-xl"
                   whileHover={{ scale: 1.02, y: -1 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ type: "spring", stiffness: 400, damping: 15 }}
@@ -347,18 +347,18 @@ const Index = () => {
             </div>
 
             {/* Free Seats Counter */}
-            <div className="mt-8 p-6 bg-[#0CF2A0]/10 rounded-xl border border-[#0CF2A0]/20">
+            <div className="mt-8 p-6 bg-blue-500/10 rounded-xl border border-blue-500/20">
               <div className="text-center space-y-3">
                 <div className="text-lg font-semibold text-white">🎁 Free for first 100 organizations</div>
                 <div className="flex items-center gap-2 justify-center">
                   <div className="flex-1 bg-gray-700 rounded-full h-2">
                     <div 
-                      className="bg-[#0CF2A0] h-2 rounded-full" 
+                      className="bg-blue-500 h-2 rounded-full" 
                       style={{ width: `${((100 - freeSeatsLeft) / 100) * 100}%` }}
                     ></div>
                   </div>
                 </div>
-                <div className="text-[#0CF2A0] font-bold">{freeSeatsLeft} Free Seats Left</div>
+                <div className="text-blue-500 font-bold">{freeSeatsLeft} Free Seats Left</div>
               </div>
             </div>
           </motion.div>
@@ -376,7 +376,7 @@ const Index = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-6">
-              What Teams Say About <span className="text-[#0CF2A0]">Trakkar</span>
+              What Teams Say About <span className="text-blue-500">Trakkar</span>
             </h2>
           </motion.div>
 
@@ -412,7 +412,7 @@ const Index = () => {
             ].map((testimonial, index) => (
               <motion.div 
                 key={index} 
-                className="bg-[#1a1a1a] border border-gray-700/50 rounded-xl p-6 hover:border-[#0CF2A0]/30 transition-all duration-300"
+                className="bg-[#1a1a1a] border border-gray-700/50 rounded-xl p-6 hover:border-blue-500/30 transition-all duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
@@ -422,7 +422,7 @@ const Index = () => {
                 <div className="space-y-4">
                   <div className="flex gap-1">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 text-[#0CF2A0] fill-current" />
+                      <Star key={i} className="h-5 w-5 text-blue-500 fill-current" />
                     ))}
                   </div>
                   
@@ -444,7 +444,7 @@ const Index = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <div className="bg-gradient-to-r from-[#0CF2A0] to-blue-500 text-[#111111] border-0 px-6 py-3 text-lg rounded-lg font-semibold inline-block">
+            <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0 px-6 py-3 text-lg rounded-lg font-semibold inline-block">
               2,157+ happy users | Built by Angrio Technologies 🇮🇳
             </div>
           </motion.div>
@@ -462,7 +462,7 @@ const Index = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-6">
-              Got <span className="text-[#0CF2A0]">Questions?</span>
+              Got <span className="text-blue-500">Questions?</span>
             </h2>
           </motion.div>
 
@@ -533,7 +533,7 @@ const Index = () => {
           <div className="grid md:grid-cols-4 gap-8">
             {/* Logo & Tagline */}
             <div className="md:col-span-2 space-y-4">
-              <div className="text-2xl font-bold text-[#0CF2A0]">Trakkar</div>
+              <div className="text-2xl font-bold text-blue-500">Trakkar</div>
               <p className="text-gray-400 max-w-md">
                 Smarter Time Management for Teams & Freelancers.
               </p>
@@ -547,10 +547,10 @@ const Index = () => {
             <div>
               <h4 className="font-semibold mb-4 text-white">Quick Links</h4>
               <div className="space-y-2 text-sm text-gray-400">
-                <div className="hover:text-[#0CF2A0] cursor-pointer transition-colors">Features</div>
-                <div className="hover:text-[#0CF2A0] cursor-pointer transition-colors">Pricing</div>
-                <div className="hover:text-[#0CF2A0] cursor-pointer transition-colors">Contact</div>
-                <div className="hover:text-[#0CF2A0] cursor-pointer transition-colors">Login</div>
+                <div className="hover:text-blue-500 cursor-pointer transition-colors">Features</div>
+                <div className="hover:text-blue-500 cursor-pointer transition-colors">Pricing</div>
+                <div className="hover:text-blue-500 cursor-pointer transition-colors">Contact</div>
+                <div className="hover:text-blue-500 cursor-pointer transition-colors">Login</div>
               </div>
             </div>
 
