@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import InteractiveHero from "@/components/ui/hero-section-nexus";
-import { BentoGrid, type BentoItem } from "@/components/ui/bento-grid";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { 
@@ -34,6 +33,7 @@ import {
 } from "lucide-react";
 import heroDashboard from "@/assets/hero-dashboard.jpg";
 import indiaFlag from "@/assets/india-flag.jpg";
+import { BentoGrid, type BentoItem } from "@/components/ui/bento-grid";
 
 const Index = () => {
   const [freeSeatsLeft] = useState(21);
@@ -42,53 +42,43 @@ const Index = () => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Bento Grid items for problems and solutions
-  const problemSolutionItems: BentoItem[] = [
+  // Problem and Solution data for cards
+  const problemSolutionData = [
     {
+      type: "problem",
       title: "Manual logs = human errors",
       description: "Employees forget to track time accurately",
-      icon: <AlertTriangle className="w-4 h-4 text-red-500" />,
-      status: "Problem",
-      tags: ["Manual", "Errors"],
-      colSpan: 1,
+      icon: <AlertTriangle className="w-6 h-6 text-red-400" />,
     },
     {
+      type: "solution",
       title: "Smart auto-tracking with screenshot capture",
       description: "Automatic time logging with visual proof of work",
-      icon: <Timer className="w-4 h-4 text-blue-500" />,
-      status: "Solution",
-      tags: ["Auto", "Screenshots"],
-      colSpan: 2,
-      hasPersistentHover: true,
+      icon: <Timer className="w-6 h-6 text-blue-400" />,
     },
     {
+      type: "problem",
       title: "No team activity overview",
       description: "Managers can't see real-time productivity",
-      icon: <Eye className="w-4 h-4 text-red-500" />,
-      status: "Problem",
-      tags: ["Visibility", "Management"],
+      icon: <Eye className="w-6 h-6 text-red-400" />,
     },
     {
+      type: "solution",
       title: "Real-time team insights",
       description: "Live dashboard showing team productivity and activity",
-      icon: <BarChart3 className="w-4 h-4 text-blue-500" />,
-      status: "Solution", 
-      tags: ["Analytics", "Real-time"],
-      colSpan: 2,
+      icon: <BarChart3 className="w-6 h-6 text-blue-400" />,
     },
     {
+      type: "problem",
       title: "Expensive tools not built for Indian teams",
       description: "Foreign solutions cost too much for local businesses",
-      icon: <DollarSign className="w-4 h-4 text-red-500" />,
-      status: "Problem",
-      tags: ["Cost", "Foreign"],
+      icon: <DollarSign className="w-6 h-6 text-red-400" />,
     },
     {
+      type: "solution",
       title: "₹70/user pricing, Made for India",
       description: "Affordable pricing designed for Indian market needs",
-      icon: <Shield className="w-4 h-4 text-blue-500" />,
-      status: "Solution",
-      tags: ["Affordable", "India"],
+      icon: <Shield className="w-6 h-6 text-blue-400" />,
     },
   ];
 
@@ -122,7 +112,7 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Problem → Solution Section with Bento Grid */}
+      {/* Problem → Solution Section with Cards */}
       <section className="py-20 bg-[#0a0a0a]">
         <div className="container mx-auto px-4">
           <motion.div 
@@ -141,12 +131,58 @@ const Index = () => {
           </motion.div>
 
           <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <BentoGrid items={problemSolutionItems} />
+            {problemSolutionData.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.02, y: -2 }}
+              >
+                <Card className={`h-full border transition-all duration-300 ${
+                  item.type === 'problem' 
+                    ? 'bg-red-950/20 border-red-800/30 hover:border-red-700/50' 
+                    : 'bg-blue-950/20 border-blue-800/30 hover:border-blue-600/50'
+                }`}>
+                  <CardHeader className="pb-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className={`p-2 rounded-lg ${
+                        item.type === 'problem' 
+                          ? 'bg-red-900/30' 
+                          : 'bg-blue-900/30'
+                      }`}>
+                        {item.icon}
+                      </div>
+                      <Badge 
+                        variant="secondary" 
+                        className={`text-xs ${
+                          item.type === 'problem' 
+                            ? 'bg-red-800/50 text-red-200 border-red-700/50' 
+                            : 'bg-blue-800/50 text-blue-200 border-blue-700/50'
+                        }`}
+                      >
+                        {item.type === 'problem' ? 'Problem' : 'Solution'}
+                      </Badge>
+                    </div>
+                    <CardTitle className="text-lg font-semibold text-white leading-tight">
+                      {item.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-400 text-sm leading-relaxed">
+                      {item.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </section>
@@ -452,7 +488,7 @@ const Index = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-[#111111]">
+      <section className="py-20 bg-[#0a0a0a]">
         <div className="container mx-auto px-4 max-w-4xl">
           <motion.div 
             className="text-center mb-16"
