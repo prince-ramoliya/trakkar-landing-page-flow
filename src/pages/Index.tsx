@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import InteractiveHero from "@/components/ui/hero-section-nexus";
@@ -5,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { StarBorder } from "@/components/ui/star-border";
 import { 
   Clock, 
   Camera, 
@@ -139,14 +141,13 @@ const Index = () => {
         <div className="container mx-auto flex items-center justify-between">
           <span className="text-gray-300 font-medium">Your team's productivity dashboard – simplified.</span>
           <div className="flex gap-3">
-            <motion.button
-              className="bg-blue-500 text-white px-6 py-2 rounded-md text-sm font-semibold hover:bg-blue-600 transition-colors duration-200 shadow-sm hover:shadow-md"
-              whileHover={{ scale: 1.03, y: -1 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            <StarBorder 
+              color="hsl(217 91% 60%)"
+              speed="4s"
+              className="transition-transform hover:scale-105"
             >
               Start Free Trial
-            </motion.button>
+            </StarBorder>
             <motion.button
               className="border border-gray-600 text-gray-300 px-6 py-2 rounded-md text-sm font-semibold hover:bg-gray-700/30 transition-colors duration-200"
               whileHover={{ scale: 1.03, y: -1 }}
@@ -260,75 +261,6 @@ const Index = () => {
           >
             <FeaturesSectionWithHoverEffects />
           </motion.div>
-        </div>
-      </section>
-
-      {/* How It Works */}
-      <section id="how-it-works" className="py-20 bg-[#0a0a0a]">
-        <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-6">
-              Start in <span className="text-blue-500">3 Simple Steps</span>
-            </h2>
-          </motion.div>
-
-          <motion.div 
-            className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, staggerChildren: 0.2 }}
-            viewport={{ once: true }}
-          >
-            {[
-              { 
-                step: "01", 
-                icon: Users, 
-                title: "Create & Invite", 
-                desc: "Set up your organization and invite your team members" 
-              },
-              { 
-                step: "02", 
-                icon: Activity, 
-                title: "Start Tracking", 
-                desc: "Begin tracking time with manual or automatic modes" 
-              },
-              { 
-                step: "03", 
-                icon: FileBarChart, 
-                title: "Get Insights", 
-                desc: "Access productivity reports and screenshots" 
-              }
-            ].map((step, index) => (
-              <motion.div 
-                key={index} 
-                className="text-center space-y-6 relative"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
-              >
-                <div className="relative">
-                  <div className="w-20 h-20 bg-blue-500 rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-500/30">
-                    <step.icon className="h-10 w-10 text-white" />
-                  </div>
-                  <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                    {step.step}
-                  </div>
-                </div>
-                <h3 className="text-2xl font-semibold text-white">{step.title}</h3>
-                <p className="text-gray-400">{step.desc}</p>
-                {index < 2 && (
-                  <ArrowRight className="h-6 w-6 text-gray-500 mx-auto mt-8 hidden md:block absolute -right-12 top-8" />
-                )}
-              </motion.div>
-            ))}
-          </motion.div>
 
           <motion.div 
             className="text-center mt-12"
@@ -337,14 +269,13 @@ const Index = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            <motion.button
-              className="bg-blue-500 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-blue-600 transition-colors duration-200 shadow-lg hover:shadow-xl"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            <StarBorder 
+              color="hsl(217 91% 60%)"
+              speed="5s"
+              className="transition-transform hover:scale-105"
             >
               Get Started – Free for 30 Days
-            </motion.button>
+            </StarBorder>
           </motion.div>
         </div>
       </section>
@@ -495,14 +426,13 @@ const Index = () => {
             viewport={{ once: true }}
           >
             <p className="text-gray-400 mb-4">Still have questions?</p>
-            <motion.button
-              className="border border-gray-600 text-gray-300 px-6 py-2 rounded-md font-semibold hover:bg-gray-700/30 transition-colors duration-200"
-              whileHover={{ scale: 1.03, y: -1 }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            <StarBorder 
+              color="hsl(217 91% 60%)"
+              speed="6s"
+              className="transition-transform hover:scale-105"
             >
               Contact Us
-            </motion.button>
+            </StarBorder>
           </motion.div>
         </div>
       </section>
