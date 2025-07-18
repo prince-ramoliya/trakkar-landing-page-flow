@@ -36,6 +36,7 @@ import indiaFlag from "@/assets/india-flag.jpg";
 import { BentoGrid, type BentoItem } from "@/components/ui/bento-grid";
 import { FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section-with-hover-effects";
 import { PricingCard } from "@/components/ui/pricing-card";
+import { TestimonialsSection } from "@/components/ui/testimonials-with-marquee";
 
 const Index = () => {
   const [freeSeatsLeft] = useState(21);
@@ -82,6 +83,50 @@ const Index = () => {
       description: "Affordable pricing designed for Indian market needs",
       icon: <Shield className="w-6 h-6 text-blue-400" />,
     },
+  ];
+
+  // Testimonials data for the new marquee section
+  const testimonials = [
+    {
+      author: {
+        name: "Priya Sharma",
+        handle: "@priyatech",
+        avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
+      },
+      text: "We switched from TimeDoctor to Trakkar — and never looked back. The Indian pricing makes it perfect for our team.",
+    },
+    {
+      author: {
+        name: "Rahul Gupta",
+        handle: "@rahuldesign",
+        avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+      },
+      text: "Finally, a time tracker that understands Indian work culture. Screenshot monitoring helps me show clients my progress.",
+    },
+    {
+      author: {
+        name: "Anjali Patel",
+        handle: "@anjaliCEO",
+        avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face"
+      },
+      text: "Trakkar has transformed how we manage our remote team. The insights are incredible for just ₹70 per user!",
+    },
+    {
+      author: {
+        name: "Vikram Singh",
+        handle: "@vikramdev",
+        avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+      },
+      text: "The automatic screenshot feature is a game-changer. No more disputes about work hours with clients.",
+    },
+    {
+      author: {
+        name: "Meera Reddy",
+        handle: "@meeramarketing",
+        avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+      },
+      text: "Best productivity tool for Indian startups. The pricing is fair and the features are exactly what we needed.",
+    }
   ];
 
   return (
@@ -378,91 +423,13 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 bg-[#0a0a0a]">
-        <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl lg:text-5xl font-semibold text-white mb-6">
-              What Teams Say About <span className="text-blue-500">Trakkar</span>
-            </h2>
-          </motion.div>
-
-          <motion.div 
-            className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, staggerChildren: 0.2 }}
-            viewport={{ once: true }}
-          >
-            {[
-              {
-                name: "Priya Sharma",
-                role: "Project Manager",
-                company: "TechFlow Solutions",
-                feedback: "We switched from TimeDoctor to Trakkar — and never looked back. The Indian pricing makes it perfect for our team.",
-                rating: 5
-              },
-              {
-                name: "Rahul Gupta", 
-                role: "Freelance Designer",
-                company: "RG Creative Studio",
-                feedback: "Finally, a time tracker that understands Indian work culture. Screenshot monitoring helps me show clients my progress.",
-                rating: 5
-              },
-              {
-                name: "Anjali Patel",
-                role: "CEO",
-                company: "Digital Marketing Hub",
-                feedback: "Trakkar has transformed how we manage our remote team. The insights are incredible for just ₹70 per user!",
-                rating: 5
-              }
-            ].map((testimonial, index) => (
-              <motion.div 
-                key={index} 
-                className="bg-[#1a1a1a] border border-gray-700/50 rounded-xl p-6 hover:border-blue-500/30 transition-all duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.02, y: -2 }}
-              >
-                <div className="space-y-4">
-                  <div className="flex gap-1">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 text-blue-500 fill-current" />
-                    ))}
-                  </div>
-                  
-                  <p className="text-gray-300 italic">"{testimonial.feedback}"</p>
-                  
-                  <div className="border-t border-gray-700 pt-4">
-                    <div className="font-semibold text-white">{testimonial.name}</div>
-                    <div className="text-sm text-gray-400">{testimonial.role}, {testimonial.company}</div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          <motion.div 
-            className="text-center mt-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
-          >
-            <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white border-0 px-6 py-3 text-lg rounded-lg font-semibold inline-block">
-              2,157+ happy users | Built by Angrio Technologies 🇮🇳
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/* Testimonials with Marquee */}
+      <TestimonialsSection
+        title="What Teams Say About Trakkar"
+        description="Join 2,157+ happy users who trust Trakkar for their time tracking needs"
+        testimonials={testimonials}
+        className="bg-[#0a0a0a]"
+      />
 
       {/* FAQ Section */}
       <section className="py-20 bg-[#0a0a0a]">
