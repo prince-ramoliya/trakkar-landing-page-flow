@@ -35,6 +35,7 @@ import heroDashboard from "@/assets/hero-dashboard.jpg";
 import indiaFlag from "@/assets/india-flag.jpg";
 import { BentoGrid, type BentoItem } from "@/components/ui/bento-grid";
 import { FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section-with-hover-effects";
+import { PricingCard } from "@/components/ui/pricing-card";
 
 const Index = () => {
   const [freeSeatsLeft] = useState(21);
@@ -303,7 +304,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Pricing Section */}
+      {/* Pricing Section with New PricingCard */}
       <section className="py-20 bg-[#111111]">
         <div className="container mx-auto px-4">
           <motion.div 
@@ -318,50 +319,48 @@ const Index = () => {
             </h2>
           </motion.div>
 
-          <motion.div 
-            className="max-w-md mx-auto"
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <div className="bg-[#1a1a1a] border border-gray-700/50 rounded-xl p-8 text-center relative overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-600"></div>
-              
-              <div className="space-y-6">
-                <div>
-                  <div className="text-5xl font-bold text-blue-500 mb-2">₹70</div>
-                  <div className="text-gray-400">per user per month</div>
-                </div>
-
-                <div className="space-y-3">
-                  {[
-                    "All features included",
-                    "No hidden charges", 
-                    "Cancel anytime",
-                    "24/7 support",
+            <PricingCard
+              title="Professional Plan"
+              description="Perfect for teams who want to boost productivity and track time efficiently."
+              price={70}
+              features={[
+                {
+                  title: "Time Tracking Features",
+                  items: [
+                    "Automatic screenshot capture",
+                    "Manual time logging",
+                    "Real-time activity monitoring",
+                    "Productivity insights",
+                    "Team dashboard",
+                    "Project management"
+                  ],
+                },
+                {
+                  title: "Team Management",
+                  items: [
+                    "Unlimited team members",
+                    "Role-based permissions",
+                    "Custom reports",
+                    "Data export options",
+                    "24/7 customer support",
                     "Made in India 🇮🇳"
-                  ].map((feature, index) => (
-                    <div key={index} className="flex items-center justify-center gap-3">
-                      <CheckCircle className="h-5 w-5 text-blue-500" />
-                      <span className="text-gray-300">{feature}</span>
-                    </div>
-                  ))}
-                </div>
+                  ],
+                },
+              ]}
+              buttonText="Start Free Trial"
+              onButtonClick={() => console.log("Start Free Trial clicked")}
+            />
+          </motion.div>
 
-                <motion.button
-                  className="bg-blue-500 text-white w-full py-3 rounded-md text-lg font-semibold hover:bg-blue-600 transition-colors duration-200 shadow-lg hover:shadow-xl"
-                  whileHover={{ scale: 1.02, y: -1 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                >
-                  Start Free Trial
-                </motion.button>
-              </div>
-            </div>
-
-            {/* Free Seats Counter */}
-            <div className="mt-8 p-6 bg-blue-500/10 rounded-xl border border-blue-500/20">
+          {/* Free Seats Counter */}
+          <div className="mt-12 max-w-md mx-auto">
+            <div className="p-6 bg-blue-500/10 rounded-xl border border-blue-500/20">
               <div className="text-center space-y-3">
                 <div className="text-lg font-semibold text-white">🎁 Free for first 100 organizations</div>
                 <div className="flex items-center gap-2 justify-center">
@@ -375,7 +374,7 @@ const Index = () => {
                 <div className="text-blue-500 font-bold">{freeSeatsLeft} Free Seats Left</div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
