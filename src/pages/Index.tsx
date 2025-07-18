@@ -34,6 +34,7 @@ import {
 import heroDashboard from "@/assets/hero-dashboard.jpg";
 import indiaFlag from "@/assets/india-flag.jpg";
 import { BentoGrid, type BentoItem } from "@/components/ui/bento-grid";
+import { FeaturesSectionWithHoverEffects } from "@/components/ui/feature-section-with-hover-effects";
 
 const Index = () => {
   const [freeSeatsLeft] = useState(21);
@@ -187,7 +188,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Feature Highlights */}
+      {/* Feature Highlights with Hover Effects */}
       <section className="py-20 bg-[#111111]">
         <div className="container mx-auto px-4">
           <motion.div 
@@ -205,36 +206,13 @@ const Index = () => {
             </p>
           </motion.div>
 
-          <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            {[
-              { icon: Timer, title: "Smart Time Capture", desc: "Automatic time tracking with manual override options", color: "text-blue-500" },
-              { icon: Camera, title: "Screenshot Monitoring", desc: "Visual proof of work with customizable capture intervals", color: "text-blue-400" },
-              { icon: Target, title: "Project & Task Tracking", desc: "Organize work by projects and track individual tasks", color: "text-blue-500" },
-              { icon: Calendar, title: "Leave Management", desc: "Handle time-off requests and attendance tracking", color: "text-blue-400" },
-              { icon: PieChart, title: "Reports & Analytics", desc: "Detailed insights into productivity and time usage", color: "text-blue-500" },
-              { icon: UserCheck, title: "Team & User Control", desc: "Manage permissions and team access levels", color: "text-blue-400" }
-            ].map((feature, index) => (
-              <motion.div
-                key={index}
-                className="group relative p-6 rounded-xl bg-[#1a1a1a] border border-gray-700/50 hover:border-blue-500/30 transition-all duration-300 cursor-pointer"
-                whileHover={{ scale: 1.02, y: -2 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                <div className="text-center space-y-4">
-                  <div className={`inline-flex p-4 rounded-2xl bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors ${feature.color}`}>
-                    <feature.icon className="h-8 w-8" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-white">{feature.title}</h3>
-                  <p className="text-gray-400">{feature.desc}</p>
-                </div>
-              </motion.div>
-            ))}
+            <FeaturesSectionWithHoverEffects />
           </motion.div>
         </div>
       </section>
